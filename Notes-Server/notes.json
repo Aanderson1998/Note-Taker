@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "noteTitle": "Hello World",
+    "createDate": "Wed May 21 00:00:00 EDT 2008",
+    "modifyDate": "Thu May 22 00:00:00 EDT 2008",
+    "tags": [ "test", "helloworld" ],
+    "contents": "Hello World.\nThis is a test"
+  },
+  {
+    "id": 2,
+    "noteTitle": "Goodbye World",
+    "createDate": "Thu Jan 01 00:00:00 EDT 1970",
+    "modifyDate": "Wed May 21 00:00:00 EDT 2008",
+    "tags": [ "test", "goodbyeworld" ],
+    "contents": "Goodbye World.\nThis is also a test"
+  }
+]
