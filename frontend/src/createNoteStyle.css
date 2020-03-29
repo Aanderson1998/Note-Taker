@@ -1,0 +1,61 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 28, 2020, 10:12:28 PM
+    Author     : aryannaanderson
+*/
+
+ .form body{
+  font-family: sans-serif;
+  text-align: center;
+}
+
+ .form {
+  width:60%;
+  margin:0 auto;
+  padding:10px;
+  font-size: 30px;
+  border: solid black;
+}
+
+.form textarea[type="text"]{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+ .form input[type="text"]{
+  font-size: 20px;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+
+}
+
+
+ .form input[type=submit] {
+  width: 50%;
+  background-color:gray;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.form input[type=submit]:hover {
+  background-color: darkgray;
+}
+.form span{
+    float:left;
+}
