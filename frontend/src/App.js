@@ -1,13 +1,23 @@
 import React from 'react';
 import './App.css';
+import NoteForm from './createNote';
 
-function App() {
-    return(
-        <div>
-            <h1>React is Working</h1>
-        </div>
-    );
-};
+export default function App() {
+    
+    const showNote = () => {
+        var note = document.getElementById("form");
+        note.style.display = "block";
+        return;
+    }
+
+        return(
+                <div>
+                    <h1>React is Working</h1>
+                    <button onClick={showNote}>Create Note</button>
+                </div>
+                );
+    }
+    ;
 
 
-export default App;
+

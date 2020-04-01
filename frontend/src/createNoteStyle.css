@@ -8,54 +8,83 @@ and open the template in the editor.
     Author     : aryannaanderson
 */
 
- .form body{
-  font-family: sans-serif;
-  text-align: center;
+.form body{
+    font-family: sans-serif;
+    text-align: center;
 }
 
- .form {
-  width:60%;
-  margin:0 auto;
-  padding:10px;
-  font-size: 30px;
-  border: solid black;
+#form {
+    position: relative;
+    display: none;
+    color: white;
+    position: fixed; 
+    z-index: 2; 
+    padding-top: 60px; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    width: 80%; 
+    height: 80%; 
+    overflow: scroll; 
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.9); 
+    margin:0 auto;
+    padding:10px;
+    font-size: 30px;
+    border: solid white;
 }
 
-.form textarea[type="text"]{
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+#form textarea[type="text"]{
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
- .form input[type="text"]{
-  font-size: 20px;
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-sizing: border-box;
+#form input[type="text"]{
+    font-size: 20px;
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 
 }
 
-
- .form input[type=submit] {
-  width: 50%;
-  background-color:gray;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+#close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
 }
 
-.form input[type=submit]:hover {
-  background-color: darkgray;
+button:hover{
+    cursor:pointer;
 }
-.form span{
-    float:left;
+
+
+
+
+#form input[type=submit] {
+    width: 50%;
+    background-color:gray;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#form input[type=submit]:hover {
+    background-color: darkgray;
+}
+#form span{
+    float: left;
 }
