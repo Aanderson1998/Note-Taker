@@ -8,12 +8,9 @@ and open the template in the editor.
     Author     : aryannaanderson
 */
 
-.form body{
+#form {
     font-family: sans-serif;
     text-align: center;
-}
-
-#form {
     position: relative;
     display: none;
     color: white;
@@ -52,7 +49,6 @@ and open the template in the editor.
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-
 }
 
 #close {
@@ -68,11 +64,9 @@ button:hover{
     cursor:pointer;
 }
 
-
-
-
 #form input[type=submit] {
     width: 50%;
+    text-align: center;
     background-color:gray;
     color: white;
     padding: 14px 20px;

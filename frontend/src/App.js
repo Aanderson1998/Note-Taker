@@ -11,7 +11,7 @@ export default function App() {
     }
 
         return(
-                <div>
+                <div id="app">
                     <h1>React is Working</h1>
                     <button onClick={showNote}>Create Note</button>
                 </div>

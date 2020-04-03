@@ -20,6 +20,15 @@ function makeRequest(title, content, tags) {
     let tagsList = tags.split(",");
     console.log(tagsList);
     //create unique id
+    const { v4: uuidv4 } = require('uuid');
+    var id = uuidv4();
+    console.log(id);
+    //creating jsonData to send to request
+    var data = {"noteTitle" : title,
+                "contents" : content,
+                "tags" : tagsList,
+                "id" : id };
+    console.log(data);
     //make request 
 }
 
@@ -82,7 +91,7 @@ export default function NoteForm() {
                         <span>Content:</span>
                         <textarea
                             className="content"
-                            rows="20"
+                            rows="10"
                             cols="30"
                             type="text"
                             {...bindContent}

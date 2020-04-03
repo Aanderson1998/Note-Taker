@@ -1,9 +1,10 @@
-body {
-    background-color: #fefefe;
+#app {
+    background-color: grey;
     text-align: center;
 }
 
-h1 {
+#app h1 {
     font-size: 40px;
     margin-top: 30px;
+    text-align: center;
 }
