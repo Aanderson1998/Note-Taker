@@ -3,15 +3,10 @@ package com.example.demo.model;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Component
 @PropertySource(value = "classpath:notes.json")
-@ConfigurationProperties
 public class Note {
 	
 	private long id;

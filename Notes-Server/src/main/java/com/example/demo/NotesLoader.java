@@ -50,7 +50,6 @@ public class NotesLoader {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
 	}
 	
 	public List<Note> getAllNotes() {
