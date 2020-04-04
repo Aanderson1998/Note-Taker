@@ -5,8 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BinaryOperator;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,34 +23,37 @@ public class NotesHandler {
 	
 	// Used to Search for Notes
 	public List<Note> filterNotesByTag (List<Note> notes, List<String> tags) {
-		List<Note> filteredNotes = new ArrayList<>();
-		Collections.copy(filteredNotes, notes); // Get a temporary list to remove elements from
-		
 		for (int i = 0; i < tags.size(); i++) {
 			String tag = tags.get(i);
 			
-			for (int j = 0; j < filteredNotes.size(); j++) {
-				Note note = filteredNotes.get(j);
+			for (int j = 0; j < notes.size(); j++) {
+				Note note = notes.get(j);
 				
 				if (!note.getTags().contains(tag)) {
-					filteredNotes.remove(j);
+					notes.remove(j);
 					j--;
 				}
 			}
 		}
 		
-		return filteredNotes;
+		return notes;
 	}
 	
 	// Used to Read Notes
-	public Note readNotes (List<Note> notes, long id) {
-		Stream<Note> records = notes.stream();
-		Note toRead = (Note) records.filter(note -> matchesID(note, id)).findFirst().get();
-		return toRead;
+	public Optional<Note> readNotes (List<Note> notes, long id) {
+		//return notes.stream().filter(note -> note.getId() == id).findFirst();
+		return notes.stream().filter(note -> note.getId() == id).reduce(toOnlyElement());
 	}
 	
-	private boolean matchesID (Note note, long id) {
-		return note.getId() == id;
+	// Source: https://blog.codefx.org/java/stream-findfirst-findany-reduce/
+	private <T> BinaryOperator<T> toOnlyElement() {
+		return toOnlyElementThrowing(IllegalArgumentException::new);
+	}
+	
+	private <T, E extends RuntimeException> BinaryOperator<T> toOnlyElementThrowing(Supplier <E> exception) {
+		return (element, otherElement) -> {
+			throw exception.get();
+		};
 	}
 	
 	// Used to Create Notes
@@ -65,38 +71,44 @@ public class NotesHandler {
 		newNote.setTags(tags);
 		newNote.setContents("");
 		notes.add(newNote);
-		// notesLoader.appendNote(newNote);
 		
 		return newNote;
 	}
 	
 	// Used to Update Notes
 	public Note updateNote (List <Note> notes, long id, Date modified, Optional<String> noteTitle, Optional<String> contents, Optional<List<String>> tags) throws ParseException {
-		Note toChange = readNotes(notes, id);
-		if (noteTitle.isPresent()) {
-			toChange.setNoteTitle(noteTitle.get());
+		Optional<Note> toChange = readNotes(notes, id);
+		
+		if (toChange.isPresent()) {
+			if (noteTitle.isPresent()) {
+				toChange.get().setNoteTitle(noteTitle.get());
+			}
+			
+			if (contents.isPresent()) {
+				toChange.get().setContents(contents.get());
+			}
+			
+			if (tags.isPresent()) {
+				toChange.get().setTags(tags.get());
+			}
+			
+			toChange.get().setModifyDate(modified);
+			return toChange.get();
 		}
 		
-		if (contents.isPresent()) {
-			toChange.setContents(contents.get());
-		}
-		
-		if (tags.isPresent()) {
-			toChange.setTags(tags.get());
-		}
-		
-		toChange.setModifyDate(modified);
-		
-		return toChange;
+		throw new NoSuchElementException("This Note doesn't exist.");
 	}
 	
 	// Used to Delete Notes
 	public void deleteNote (List <Note> notes, long id) {
-		Note toDelete = readNotes(notes, id);
-		int position = notes.indexOf(toDelete);
-		notes.remove(position);
-		
-		
+		Optional<Note> toDelete = readNotes(notes, id);
+		if (toDelete.isPresent()) {
+			int position = notes.indexOf(toDelete.get());
+			notes.remove(position);
+			System.out.println("Deleted Note");
+		} else {
+			throw new NoSuchElementException("This Note doesn't exist.");
+		}
 	}
 	
 }

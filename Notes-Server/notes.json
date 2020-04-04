@@ -14,16 +14,23 @@
   "contents" : "Goodbye World.\nThis is also a test"
 }, {
   "id" : 2,
-  "noteTitle" : "CIS-4360 TEST",
+  "noteTitle" : "CIS-4360 TEST AGAIN NO MORE PLS",
   "createDate" : "Fri Apr 03 23:59:36 2020",
-  "modifyDate" : "Fri Apr 03 23:59:36 2020",
-  "tags" : [ ],
-  "contents" : ""
+  "modifyDate" : "Sat Apr 04 01:07:18 2020",
+  "tags" : [ "test", "Spaghetti!" ],
+  "contents" : "This is some pretty cool stuff right here."
 }, {
-  "id" : 3,
+  "id" : 4,
+  "noteTitle" : "Arnold Schwarzenegger",
+  "createDate" : "Sat Apr 04 00:14:50 2020",
+  "modifyDate" : "Sat Apr 04 01:07:18 2020",
+  "tags" : [ "test", "Spaghetti!" ],
+  "contents" : "I'll be back"
+}, {
+  "id" : 5,
   "noteTitle" : "CIS-4360 TEST AGAIN",
-  "createDate" : "Sat Apr 04 00:01:28 2020",
-  "modifyDate" : "Sat Apr 04 00:01:28 2020",
-  "tags" : [ "test" ],
+  "createDate" : "Sat Apr 04 00:15:33 2020",
+  "modifyDate" : "Sat Apr 04 00:15:33 2020",
+  "tags" : [ "test", "helloworld" ],
   "contents" : ""
 } ]
