@@ -56,7 +56,7 @@ public class NotesController {
 		}
 	}
 	
-	@PostMapping(path="/create", produces = "application.json", consumes = "application.json")
+	@PostMapping(path="/create")
 	public ResponseEntity<Note> createNote (@RequestBody Note noteBody) throws ParseException {
 		Note note = handler.createNote(loader.getAllNotes(), noteBody.getNoteTitle(), Optional.of(noteBody.getTags()));
 		if (note == null) {

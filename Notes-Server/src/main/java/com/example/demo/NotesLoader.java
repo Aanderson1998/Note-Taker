@@ -22,7 +22,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 @Component
 public class NotesLoader {
-	private static final String filename = "notes.json";
+	private static final String filename = "src/main/resources/notes.json";
 	private List<Note> notes;
 	
 	@PostConstruct
@@ -33,7 +33,7 @@ public class NotesLoader {
 			TypeReference<List<Note>> typeReference = new TypeReference<List<Note>>() {};
 			notes = mapper.readValue(input, typeReference);
 			for (Note p : notes) {
-				System.out.println(p.getNoteTitle());
+				System.out.println(p.toString());
 			}
 			Note note = new Note();
 			note.setCreateDate(new Date());
@@ -57,7 +57,7 @@ public class NotesLoader {
 	}
 	
 	@PreDestroy
-	public void overwriteNotes (List<Note> notes) {
+	public void overwriteNotes () {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		
