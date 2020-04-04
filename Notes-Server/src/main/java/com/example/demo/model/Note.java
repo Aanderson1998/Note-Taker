@@ -1,13 +1,13 @@
 package com.example.demo.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Component
 @PropertySource(value = "classpath:notes.json")
@@ -16,12 +16,14 @@ public class Note {
 	
 	private long id;
 	private String noteTitle;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
 	private Date createDate;
+	
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
 	private Date modifyDate;
 	private List<String> tags;
 	private String contents;
-	
-	private static SimpleDateFormat date = new SimpleDateFormat("E MMM dd HH:mm:ss z yyyy");
 	
 	public long getId() {
 		return id;
@@ -43,16 +45,16 @@ public class Note {
 		return createDate;
 	}
 	
-	public void setCreateDate(String createDate) throws ParseException {
-		this.createDate = date.parse(createDate);
+	public void setCreateDate(Date createDate) {
+		this.createDate = createDate;
 	}
 	
 	public Date getModifyDate() {
 		return modifyDate;
 	}
 	
-	public void setModifyDate(String modifyDate) throws ParseException {
-		this.modifyDate = date.parse(modifyDate);
+	public void setModifyDate(Date modifyDate) {
+		this.modifyDate = modifyDate;
 	}
 	
 	public List<String> getTags() {
@@ -69,6 +71,11 @@ public class Note {
 	
 	public void setContents(String contents) {
 		this.contents = contents;
+	}
+	
+	@Override
+	public String toString () {
+		return noteTitle + " ID = " + id + " " + createDate + " " + modifyDate + " " + tags.toString() + " " + contents;
 	}
 	
 }
