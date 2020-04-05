@@ -20,17 +20,30 @@ function makeRequest(title, content, tags) {
     let tagsList = tags.split(",");
     console.log(tagsList);
     //create unique id
-    const { v4: uuidv4 } = require('uuid');
+    const {v4: uuidv4} = require('uuid');
     var id = uuidv4();
     console.log(id);
     //creating jsonData to send to request
-    var data = {"noteTitle" : title,
-                "contents" : content,
-                "tags" : tagsList,
-                "id" : id };
+    let data = {// "id": id, 
+        "noteTitle": title,
+        "tags": tagsList,
+        "contents": content};
     console.log(data);
-    //make request 
-}
+    //setting request url
+    let url = 'http://localhost:8080/create';
+    //doing fetch request to create new note in server
+    fetch(url, {
+        method: 'POST',
+        headers: new Headers({
+            'Content-Type': 'application/json'
+        }),
+        body: JSON.stringify(data)
+    }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+                return data;
+            });
+    }
 
 export default function NoteForm() {
     //initializing title, content, and tag values
