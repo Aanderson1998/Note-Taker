@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @PropertySource(value = "classpath:notes.json")
 public class Note {
 	
-	private long id;
+	private String id;
 	private String noteTitle;
 	
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "E MMM dd HH:mm:ss yyyy")
@@ -20,11 +20,11 @@ public class Note {
 	private List<String> tags;
 	private String contents;
 	
-	public long getId() {
+	public String getId() {
 		return id;
 	}
 	
-	public void setId(long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	

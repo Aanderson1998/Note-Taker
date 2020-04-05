@@ -6,7 +6,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BinaryOperator;
 import java.util.function.Supplier;
 
@@ -16,9 +15,6 @@ import com.example.demo.model.Note;
 
 @Component
 public class NotesHandler {
-	
-	AtomicLong atomicLong = new AtomicLong();
-	boolean firstTime = true;
 	
 	// Used to Search for Notes
 	public List<Note> filterNotesByTag (List<Note> notes, List<String> tags) {
@@ -39,9 +35,9 @@ public class NotesHandler {
 	}
 	
 	// Used to Read Notes
-	public Optional<Note> readNotes (List<Note> notes, long id) {
+	public Optional<Note> readNotes (List<Note> notes, String id) {
 		//return notes.stream().filter(note -> note.getId() == id).findFirst();
-		return notes.stream().filter(note -> note.getId() == id).reduce(toOnlyElement());
+		return notes.stream().filter(note -> note.getId().equals(id)).reduce(toOnlyElement());
 	}
 	
 	// Source: https://blog.codefx.org/java/stream-findfirst-findany-reduce/
@@ -57,16 +53,11 @@ public class NotesHandler {
 	}
 	
 	// Used to Create Notes
-	public Note createNote (List<Note> notes, String noteTitle, Optional<List<String>> tags) throws ParseException {
-		if (firstTime) {
-			firstTime = false;
-			atomicLong.set(notes.size());
-		}
-		
+	public Note createNote (List<Note> notes, String id, String noteTitle, Optional<List<String>> tags, Optional<String> contents) throws ParseException {
 		Note newNote = new Note();
 		Date date = new Date();
 		
-		newNote.setId(atomicLong.getAndIncrement());
+		newNote.setId(id);
 		newNote.setNoteTitle(noteTitle);
 		newNote.setCreateDate(date);
 		newNote.setModifyDate(date);
@@ -78,6 +69,12 @@ public class NotesHandler {
 			newNote.setTags(noTags);
 		}
 		
+		if (contents.isPresent()) {
+			newNote.setContents(contents.get());
+		} else {
+			newNote.setContents("");
+		}
+		
 		newNote.setContents("");
 		notes.add(newNote);
 		
@@ -85,7 +82,7 @@ public class NotesHandler {
 	}
 	
 	// Used to Update Notes
-	public Note updateNote (List <Note> notes, long id, Optional<String> noteTitle, Optional<String> contents, Optional<List<String>> tags) throws ParseException {
+	public Note updateNote (List <Note> notes, String id, Optional<String> noteTitle, Optional<String> contents, Optional<List<String>> tags) throws ParseException {
 		Optional<Note> toChange = readNotes(notes, id);
 		
 		if (toChange.isPresent()) {
@@ -109,7 +106,7 @@ public class NotesHandler {
 	}
 	
 	// Used to Delete Notes
-	public void deleteNote (List <Note> notes, long id) {
+	public void deleteNote (List <Note> notes, String id) {
 		Optional<Note> toDelete = readNotes(notes, id);
 		if (toDelete.isPresent()) {
 			int position = notes.indexOf(toDelete.get());

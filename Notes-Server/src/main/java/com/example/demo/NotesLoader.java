@@ -9,8 +9,6 @@ import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
-
 import org.springframework.stereotype.Component;
 
 import com.example.demo.model.Note;
@@ -56,7 +54,6 @@ public class NotesLoader {
 		return notes;
 	}
 	
-	@PreDestroy
 	public void overwriteNotes () {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.enable(SerializationFeature.INDENT_OUTPUT);

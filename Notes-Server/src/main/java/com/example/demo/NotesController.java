@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,13 +15,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.Note;
+import com.example.demo.model.SearchStrings;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class NotesController {
 	private NotesLoader loader;
 	private NotesHandler handler;
@@ -37,8 +39,8 @@ public class NotesController {
 	}
 	
 	@GetMapping("/search")
-	public List<Note> searchNotes (@RequestParam List<String> tags) {
-		return handler.filterNotesByTag(loader.getAllNotes(), tags);
+	public List<Note> searchNotes (@RequestBody SearchStrings tagList) {
+		return handler.filterNotesByTag(loader.getAllNotes(), tagList.getTags());
 	}
 	
 	@GetMapping(path="/get_all")
@@ -47,7 +49,7 @@ public class NotesController {
 	}
 	
 	@GetMapping(path="/read/{id}")
-	public ResponseEntity<Note> readNote (@PathVariable("id") long id) {
+	public ResponseEntity<Note> readNote (@PathVariable("id") String id) {
 		Optional<Note> note = handler.readNotes(loader.getAllNotes(), id);
 		if (note.isPresent()) {
 			return ResponseEntity.ok(note.get());
@@ -58,7 +60,7 @@ public class NotesController {
 	
 	@PostMapping(path="/create")
 	public ResponseEntity<Note> createNote (@RequestBody Note noteBody) throws ParseException {
-		Note note = handler.createNote(loader.getAllNotes(), noteBody.getNoteTitle(), Optional.of(noteBody.getTags()));
+		Note note = handler.createNote(loader.getAllNotes(), noteBody.getId(), noteBody.getNoteTitle(), Optional.of(noteBody.getTags()), Optional.of(noteBody.getContents()));
 		if (note == null) {
 			return ResponseEntity.notFound().build();
 		} else {
@@ -68,7 +70,7 @@ public class NotesController {
 	}
 	
 	@PutMapping(path="/update/{id}")
-	public ResponseEntity<Note> updateNote (@PathVariable long id, @RequestBody(required=false) Note noteBody) throws ParseException {
+	public ResponseEntity<Note> updateNote (@PathVariable String id, @RequestBody(required=false) Note noteBody) throws ParseException {
 		Note note = handler.updateNote(loader.getAllNotes(), id, Optional.of(noteBody.getNoteTitle()), Optional.of(noteBody.getContents()), Optional.of(noteBody.getTags()));
 		if (note == null) {
 			return ResponseEntity.notFound().build();
@@ -78,8 +80,14 @@ public class NotesController {
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public ResponseEntity<Object> deleteNote (@PathVariable long id) {
+	public ResponseEntity<Object> deleteNote (@PathVariable String id) {
 		handler.deleteNote(loader.getAllNotes(), id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@GetMapping("/overwrite")
+	public ResponseEntity<Object> saveAllNotes () {
+		loader.overwriteNotes();
+		return ResponseEntity.ok().build();
 	}
 }
