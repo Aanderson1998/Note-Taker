@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.demo.model.Note;
-import com.example.demo.model.SearchStrings;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -39,8 +39,13 @@ public class NotesController {
 	}
 	
 	@GetMapping("/search")
-	public List<Note> searchNotes (@RequestBody SearchStrings tagList) {
-		return handler.filterNotesByTag(loader.getAllNotes(), tagList.getTags());
+	public ResponseEntity<List<Note>> searchNotes (@RequestParam List<String> tagList) {
+		List<Note> filteredNotes = handler.filterNotesByTag(loader.getAllNotes(), tagList);
+		if (filteredNotes.size() > 0) {
+			return ResponseEntity.ok(filteredNotes);
+		} else {
+			return ResponseEntity.noContent().build();
+		}
 	}
 	
 	@GetMapping(path="/get_all")

@@ -18,20 +18,23 @@ public class NotesHandler {
 	
 	// Used to Search for Notes
 	public List<Note> filterNotesByTag (List<Note> notes, List<String> tags) {
+		List<Note> filteredNotes = new ArrayList<>();
+		filteredNotes.addAll(notes);
+		
 		for (int i = 0; i < tags.size(); i++) {
 			String tag = tags.get(i);
 			
-			for (int j = 0; j < notes.size(); j++) {
-				Note note = notes.get(j);
+			for (int j = 0; j < filteredNotes.size(); j++) {
+				Note note = filteredNotes.get(j);
 				
 				if (!note.getTags().contains(tag)) {
-					notes.remove(j);
+					filteredNotes.remove(j);
 					j--;
 				}
 			}
 		}
 		
-		return notes;
+		return filteredNotes;
 	}
 	
 	// Used to Read Notes
@@ -75,7 +78,6 @@ public class NotesHandler {
 			newNote.setContents("");
 		}
 		
-		newNote.setContents("");
 		notes.add(newNote);
 		
 		return newNote;
@@ -100,9 +102,9 @@ public class NotesHandler {
 			
 			toChange.get().setModifyDate(new Date());
 			return toChange.get();
+		} else {
+			throw new NoSuchElementException("This Note doesn't exist.");
 		}
-		
-		throw new NoSuchElementException("This Note doesn't exist.");
 	}
 	
 	// Used to Delete Notes
