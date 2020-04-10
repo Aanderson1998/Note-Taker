@@ -17,7 +17,7 @@ function ContentContainer() {
             "id": "1",
             "title": "Note 1",
             "content": "The content of a note",
-            "tags": ["work"]
+            "tags": ["work", "school"]
         },
         {
             "id": "2",
@@ -35,6 +35,19 @@ function ContentContainer() {
 
     const fetchNotes = () => {
         console.log("getting notes from:", FETCH_URL);
+    };
+
+    const updateNote = (note) => {
+        // temporary for local notes
+        let newNotes = null;
+        notes.filter((n, i) => {
+            if (n.id === note.id) {
+                notes[i] = note;
+                console.log("updating the note:");
+            }
+        });
+        
+        // setNotes(newNotes);
     };
 
     // holds an array of notes that match the filter critera
@@ -65,7 +78,7 @@ function ContentContainer() {
                 <FilterNotes filter={setFilterBy} />
                 <NotesContainer notes={filterResults} updateNoteToDisplay={setCurrentNoteIndex} />
             </div>
-            <ContentArea note={filterResults[currentNoteIndex]} />
+            <ContentArea note={filterResults[currentNoteIndex]} updateNote={updateNote} />
         </div>
     );
 }

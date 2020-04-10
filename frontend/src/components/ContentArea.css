@@ -3,3 +3,16 @@
     height: 100%;
     outline: none;
 }
+
+.content-area .tags-container {
+    display: flex;
+    align-items: center;
+}
+
+.content-area .tags {
+    background-color: royalblue;
+    padding: 0.2em 0.4em;
+    margin: 0.2em;
+    border-radius: 4px;
+    color: white;
+}
