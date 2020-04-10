@@ -22,7 +22,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.demo.model.Note;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "{*}")
 public class NotesController {
 	private NotesLoader loader;
 	private NotesHandler handler;
@@ -35,7 +35,7 @@ public class NotesController {
 	
 	@RequestMapping("/")
 	public String home () {
-		return "Welcome to the Notes Server";
+		return "Welcome to the Notes Server.";
 	}
 	
 	@GetMapping("/search")
@@ -69,6 +69,7 @@ public class NotesController {
 		if (note == null) {
 			return ResponseEntity.notFound().build();
 		} else {
+			loader.overwriteNotes();
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/read/{id}").buildAndExpand(note.getId()).toUri();
 			return ResponseEntity.created(uri).body(note);
 		}
@@ -80,6 +81,7 @@ public class NotesController {
 		if (note == null) {
 			return ResponseEntity.notFound().build();
 		} else {
+			loader.overwriteNotes();
 			return ResponseEntity.ok(note);
 		}
 	}
@@ -87,6 +89,7 @@ public class NotesController {
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<Object> deleteNote (@PathVariable String id) {
 		handler.deleteNote(loader.getAllNotes(), id);
+		loader.overwriteNotes();
 		return ResponseEntity.noContent().build();
 	}
 	
