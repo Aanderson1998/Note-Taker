@@ -1,0 +1,11 @@
+.content-container {
+    height: 50vh; /* Change to 100vh later */
+    padding: 1em;
+    display: grid;
+    grid-template-columns: 400px auto;
+    grid-gap: 2em;
+}
+
+@media only screen and (min-width: 1200px) {
+    
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import './App.css';
 import NoteForm from './createNote';
+import Navbar from './components/Navbar';
+import ContentContainer from './components/ContentContainer';
 
 export default function App() {
     
@@ -12,7 +14,8 @@ export default function App() {
 
         return(
                 <div id="app">
-                    <h1>React is Working</h1>
+                    <Navbar />
+                    <ContentContainer />
                     <button onClick={showNote}>Create Note</button>
                 </div>
                 );
