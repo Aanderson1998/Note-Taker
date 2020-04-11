@@ -24,7 +24,7 @@ function makeRequest(title, content, tags) {
     var id = uuidv4();
     console.log(id);
     //creating jsonData to send to request
-    let data = {// "id": id, 
+    let data = {"id": id, 
         "noteTitle": title,
         "tags": tagsList,
         "contents": content};
@@ -89,10 +89,10 @@ export default function NoteForm() {
     //returning note form
     return (
             <div id="form">
-                <h1> Create New Note</h1>
+                <h1>New Note</h1>
                 <form onSubmit={handleSubmit}>
                     <label>
-                        <span>Title:</span>
+                        <h4>Title:</h4>
                         <input
                             className="title"
                             type="text"
@@ -101,17 +101,17 @@ export default function NoteForm() {
                             />
                     </label>
                     <label>
-                        <span>Content:</span>
+                        <h4>Content:</h4>
                         <textarea
                             className="content"
-                            rows="10"
+                            rows="8"
                             cols="30"
                             type="text"
                             {...bindContent}
                             />
                     </label>
                     <label>
-                        <span>Tags (seperate tags by commas):</span>
+                        <h4>Tags (seperate tags by commas):</h4>
                         <input
                             className="tags"
                             type="text"

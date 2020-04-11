@@ -17,7 +17,7 @@ export default function App() {
 
         return(
             <div id="app">
-                <Navbar bg="dark" variant="dark">
+                <Navbar bg="primary" variant="dark style">
                     <Navbar.Brand>Note Taker++</Navbar.Brand>
                 </Navbar>
                 <ContentContainer />
