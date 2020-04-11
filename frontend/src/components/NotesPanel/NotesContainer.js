@@ -1,14 +1,20 @@
-import React from 'react';
-import Note from './Note';
+/*
+    Holds all of the notes in the left bar that were created and
+    allows for a note to be selected to be viewed
+*/
+
+
+import React, {useContext} from 'react';
+import Note from '../NotesEditor/Note';
 import './NotesContainer.css';
+import { NoteContext } from '../../contexts/NoteContext';
 
 function NotesContainer({notes, updateNoteToDisplay}) {
-    const MAX_CONTENT_LENGTH = 100;
+    const MAX_CONTENT_LENGTH = 80;
+    const [note, setNote, filterNotes, filterResults] = useContext(NoteContext);
 
-    const handleClick = (index) => {
-        // gets the index in local notes array of the current not to display
-        // console.log(e);
-        updateNoteToDisplay(index);
+    const handleClick = (n) => {
+        setNote(n);
     };
 
     const trimContent = (content) => {
@@ -22,19 +28,20 @@ function NotesContainer({notes, updateNoteToDisplay}) {
                 result += content.charAt(i);
             }
             result += "...";
+            console.log(result);
         }
 
         return trimmed? result: content;
     };
 
-    if (notes.length > 0) {
+    if (filterResults.length > 0) {
         return(
             <div className="notes-container" >
-                {notes.map((data, index) => {
+                {filterResults.map((data, index) => {
                     if (!data.contentTrimmed)
                         data.contentTrimmed = trimContent(data.content);
-    
-                    return <Note key={index} index={index} note={data} updateIndex={handleClick} />;
+                    
+                    return <Note key={index} index={index} note={data} updateIndex={() => handleClick({id: data.id, title: data.title, content: data.content, tags: data.tags})} />;
                 })}
             </div>
         );

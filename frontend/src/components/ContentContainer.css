@@ -5,7 +5,3 @@
     grid-template-columns: 400px auto;
     grid-gap: 2em;
 }
-
-@media only screen and (min-width: 1200px) {
-    
-}
