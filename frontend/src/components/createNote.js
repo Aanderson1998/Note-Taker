@@ -50,6 +50,7 @@ export default function NoteForm() {
     const {value: Title, bind: bindTitle, reset: resetTitle} = useInput("");
     const {value: Content, bind: bindContent, reset: resetContent} = useInput("");
     const {value: Tags, bind: bindTags, reset: resetTags} = useInput("");
+    
 
     const handleClose = evt => {
         evt.preventDefault();

@@ -27,7 +27,6 @@ function FilterNotes({filter}) {
             <Form.Group>
                 <Form.Control onChange={handleOnChange} type="text" placeholder="Start typing to filter by content" />
             </Form.Group>
-            {/* TODO: add filter by tags and dates */}
         </Form>
     );
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import NoteForm from './createNote';
 import {Navbar} from 'react-bootstrap';
 import ContentContainer from './components/ContentContainer';
 
@@ -8,24 +7,16 @@ import './App.css';
 
 
 export default function App() {
-    
-    const showNote = () => {
-        var note = document.getElementById("form");
-        note.style.display = "block";
-        return;
-    }
-
-        return(
+    return(
             <div id="app">
-                <Navbar bg="primary" variant="dark style">
+                <Navbar bg="primary" variant="dark">
                     <Navbar.Brand>Note Taker++</Navbar.Brand>
                 </Navbar>
                 <ContentContainer />
-                <button onClick={showNote}>Create Note</button>
             </div>
             );
-    }
-    ;
+}
+;
 
 
 

@@ -1,10 +1,11 @@
 .content-area {
-    
+    color:white;
 }
 
 .content-area textarea {
     width: 100%;
     height: 100%;
+    border: thick solid #C8C9CB;  
     outline: none;
 }
 
@@ -25,10 +26,10 @@
     text-align: center;
     font-size: 18px;
     padding-top: 2em;
-    /* color: rgb(43, 43, 43); */
+    color: white; 
 }
 
-.btn-save {
+.content-area .btn-save {
     background-color: rgb(84, 223, 84);
     color: rgb(43, 43, 43);
     border: none;

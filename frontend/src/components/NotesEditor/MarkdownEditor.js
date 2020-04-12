@@ -13,7 +13,7 @@ function MarkdownEditor() {
             content: e.target.value,
             tags: note.tags
         });
-    }
+    };
 
     return(
         <div className="markdown-editor">

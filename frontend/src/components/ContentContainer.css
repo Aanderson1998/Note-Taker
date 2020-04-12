@@ -1,7 +1,14 @@
 .content-container {
-    height: 100vh; /* Change to 100vh later */
+    height: 50vh; /* Change to 100vh later */
     padding: 1em;
     display: grid;
     grid-template-columns: 400px auto;
     grid-gap: 2em;
+    border-left:right;
+}
+
+.content-container button{
+    background-color:royalblue;
+    color: white;
+    margin:1em;
 }

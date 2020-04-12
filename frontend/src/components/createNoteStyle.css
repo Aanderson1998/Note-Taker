@@ -28,7 +28,7 @@ and open the template in the editor.
     margin:0 auto;
     padding:10px;
     font-size: 30px;
-    border: thick solid grey;
+    border: thick solid white;
 }
 
 #form textarea[type="text"]{
@@ -76,6 +76,7 @@ and open the template in the editor.
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: 0.7s background-color;
 }
 
 #form input[type=submit]:hover {

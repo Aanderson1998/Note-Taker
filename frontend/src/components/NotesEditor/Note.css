@@ -3,6 +3,7 @@
     cursor: pointer;
     transition: 0.4s background-color;
     background-color:whitesmoke;
+    border:thick solid #C8C9CB;
 }
 
 .note:hover {
