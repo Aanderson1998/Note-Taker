@@ -9,7 +9,13 @@ import "./createNoteStyle.css";
 //hook created to handle resetting values to empty after submission of note
 import { useInput } from "./inputHook";
 
-
+function handleCreateErrors(response) {
+        if (!response.ok) {
+            console.log("invalid call to api");
+            alert("note could not be created");
+        }
+        return response;
+    }
 //function that takes input and sends it to server 
 function makeRequest(title, content, tags) {
     console.log(title);
@@ -38,7 +44,8 @@ function makeRequest(title, content, tags) {
             'Content-Type': 'application/json'
         }),
         body: JSON.stringify(data)
-    }).then(response => response.json())
+    }).then(handleCreateErrors)
+            .then(response => response.json())
             .then(data => {
                 console.log(data);
                 return data;

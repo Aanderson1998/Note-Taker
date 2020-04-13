@@ -10,7 +10,23 @@ import MarkdownEditor from './MarkdownEditor';
 import './ContentArea.css';
 import { NoteContext } from '../../contexts/NoteContext';
 
-
+function handleUpdateErrors(response) {
+        if (!response.ok) {
+            console.log("error calling api");
+            alert("note could not be updated");
+        }
+        return response;
+    };
+    
+    function handleDeleteErrors(response) {
+        if (!response.ok) {
+            console.log("error calling api");
+            alert("note could not be deleted");
+        }
+        return response;
+    };
+    
+    
 function ContentArea() {
     const [note] = useContext(NoteContext);
 
@@ -31,7 +47,8 @@ function ContentArea() {
                 'Content-Type': 'application/json'
             }),
             body: JSON.stringify(data)
-        }).then(response => response.json())
+        }).then(handleUpdateErrors)
+                .then(response => response.json())
                 .then(data => {
                     console.log(data);
                     return data;
@@ -56,7 +73,8 @@ function ContentArea() {
                 headers: new Headers({
                     'Content-Type': 'application/json'
                 })
-            }).then(response => response.json())
+            }).then(handleDeleteErrors)
+                    .then(response => response.json())
                     .then(data => {
                         console.log(data);
                         return data;
