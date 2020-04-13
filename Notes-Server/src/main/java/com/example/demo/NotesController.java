@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.net.URI;
 import java.text.ParseException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -35,7 +36,19 @@ public class NotesController {
 	
 	@RequestMapping("/")
 	public String home () {
-		return "Welcome to the Notes Server.";
+		return "Welcome to the Notes Server. Send a Request to '/help' to see the available HTTP Requests.";
+	}
+	
+	@RequestMapping("/help")
+	public String getHelp () {
+		List<String> commands = Arrays.asList("/ - Access the Home Page", "/help - Pull up the help page...like what you are doing right now", 
+				"/search'?tagList=tag1&tagList=tag2' - Perform a search of all the notes that contains the tags in your query", 
+				"/get_all - Gets all the notes", "/read/{id} - Read a note with a given ID", "/create - Create a note when provided with a request body", 
+				"/update/{id} - Updates a note with a given id with the request body", "/delete/{id} - Deletes a note with a given id", 
+				"/overwrite - Implicitly called after calling create, update, and delete, this is used to save your notes. Can be called directly if you want to save it explicitly");
+		String result = String.join("\n", commands);
+		
+		return result;
 	}
 	
 	@GetMapping("/search")
@@ -65,7 +78,7 @@ public class NotesController {
 	
 	@PostMapping(path="/create")
 	public ResponseEntity<Note> createNote (@RequestBody Note noteBody) throws ParseException {
-		Note note = handler.createNote(loader.getAllNotes(), noteBody.getId(), noteBody.getNoteTitle(), Optional.of(noteBody.getTags()), Optional.of(noteBody.getContents()));
+		Note note = handler.createNote(loader.getAllNotes(), noteBody.getId(), noteBody.getNoteTitle(), noteBody.getTags(), noteBody.getContents());
 		if (note == null) {
 			return ResponseEntity.notFound().build();
 		} else {
@@ -76,8 +89,8 @@ public class NotesController {
 	}
 	
 	@PutMapping(path="/update/{id}")
-	public ResponseEntity<Note> updateNote (@PathVariable String id, @RequestBody(required=false) Note noteBody) throws ParseException {
-		Note note = handler.updateNote(loader.getAllNotes(), id, Optional.of(noteBody.getNoteTitle()), Optional.of(noteBody.getContents()), Optional.of(noteBody.getTags()));
+	public ResponseEntity<Note> updateNote (@PathVariable String id, @RequestBody Note noteBody) throws ParseException {
+		Note note = handler.updateNote(loader.getAllNotes(), id, noteBody.getNoteTitle(), noteBody.getContents(), noteBody.getTags());
 		if (note == null) {
 			return ResponseEntity.notFound().build();
 		} else {

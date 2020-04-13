@@ -56,7 +56,7 @@ public class NotesHandler {
 	}
 	
 	// Used to Create Notes
-	public Note createNote (List<Note> notes, String id, String noteTitle, Optional<List<String>> tags, Optional<String> contents) throws ParseException {
+	public Note createNote (List<Note> notes, String id, String noteTitle, List<String> tags, String contents) throws ParseException {
 		Note newNote = new Note();
 		Date date = new Date();
 		
@@ -64,19 +64,8 @@ public class NotesHandler {
 		newNote.setNoteTitle(noteTitle);
 		newNote.setCreateDate(date);
 		newNote.setModifyDate(date);
-		
-		if (tags.isPresent()) {
-			newNote.setTags(tags.get());
-		} else {
-			List<String> noTags = new ArrayList<>();
-			newNote.setTags(noTags);
-		}
-		
-		if (contents.isPresent()) {
-			newNote.setContents(contents.get());
-		} else {
-			newNote.setContents("");
-		}
+		newNote.setTags(tags);
+		newNote.setContents(contents);
 		
 		notes.add(newNote);
 		
@@ -84,22 +73,13 @@ public class NotesHandler {
 	}
 	
 	// Used to Update Notes
-	public Note updateNote (List <Note> notes, String id, Optional<String> noteTitle, Optional<String> contents, Optional<List<String>> tags) throws ParseException {
+	public Note updateNote (List <Note> notes, String id, String noteTitle, String contents, List<String> tags) throws ParseException {
 		Optional<Note> toChange = readNotes(notes, id);
 		
 		if (toChange.isPresent()) {
-			if (noteTitle.isPresent()) {
-				toChange.get().setNoteTitle(noteTitle.get());
-			}
-			
-			if (contents.isPresent()) {
-				toChange.get().setContents(contents.get());
-			}
-			
-			if (tags.isPresent()) {
-				toChange.get().setTags(tags.get());
-			}
-			
+			toChange.get().setNoteTitle(noteTitle);
+			toChange.get().setContents(contents);
+			toChange.get().setTags(tags);
 			toChange.get().setModifyDate(new Date());
 			return toChange.get();
 		} else {
