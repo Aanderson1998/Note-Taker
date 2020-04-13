@@ -2,8 +2,6 @@
     Holds all of the notes in the left bar that were created and
     allows for a note to be selected to be viewed
 */
-
-
 import React, {useContext} from 'react';
 import Note from '../NotesEditor/Note';
 import './NotesContainer.css';

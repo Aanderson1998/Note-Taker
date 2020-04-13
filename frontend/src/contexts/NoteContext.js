@@ -47,10 +47,10 @@ const NoteContextProvider = (props) => {
     const filterNotes = (filter) => {
         const results = notes.filter(value => 
             value.title.toLowerCase().includes(filter.search.toLowerCase()) || value.content.toLowerCase().includes(filter.search.toLowerCase())
-        )
+        );
         
         setFilterResults(results);
-    }
+    };
 
 
     return(
@@ -58,6 +58,6 @@ const NoteContextProvider = (props) => {
             {props.children}
         </NoteContext.Provider>
     );
-}
+};
 
 export {NoteContext, NoteContextProvider};

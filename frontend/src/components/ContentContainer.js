@@ -3,7 +3,6 @@
     notes and note editing area in a responsive way.
 */
 import React, { useState, useEffect } from 'react';
-import NoteForm from './NotesCreator/createNote';
 import FilterNotes from './NotesPanel/FilterNotes';
 import NotesContainer from './NotesPanel/NotesContainer';
 import ContentArea from './NotesEditor/ContentArea';
@@ -11,11 +10,13 @@ import {NoteContextProvider} from '../contexts/NoteContext';
 import './ContentContainer.css';
 
 function ContentContainer() {
+    
     const showNote = () => {
         var note = document.getElementById("form");
         note.style.display = "block";
         return;
     };
+    
     return(
         <div className="content-container">
             <NoteContextProvider>
