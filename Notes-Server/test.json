@@ -1,0 +1,36 @@
+[ {
+  "id" : 0,
+  "noteTitle" : "Hello World",
+  "createDate" : "Wed May 21 00:00:00 2008",
+  "modifyDate" : "Thu May 22 00:00:00 2008",
+  "tags" : [ "test", "helloworld" ],
+  "contents" : "Hello World.\nThis is a test"
+}, {
+  "id" : 1,
+  "noteTitle" : "Goodbye World",
+  "createDate" : "Thu Jan 01 00:00:00 1970",
+  "modifyDate" : "Wed May 21 00:00:00 2008",
+  "tags" : [ "test", "goodbyeworld" ],
+  "contents" : "Goodbye World.\nThis is also a test"
+}, {
+  "id" : 2,
+  "noteTitle" : "CIS-4360 TEST",
+  "createDate" : "Fri Apr 03 23:59:36 2020",
+  "modifyDate" : "Fri Apr 03 23:59:36 2020",
+  "tags" : [ ],
+  "contents" : ""
+}, {
+  "id" : 3,
+  "noteTitle" : "CIS-4360 TEST AGAIN",
+  "createDate" : "Sat Apr 04 00:01:28 2020",
+  "modifyDate" : "Sat Apr 04 00:01:28 2020",
+  "tags" : [ "test" ],
+  "contents" : ""
+}, {
+  "id" : 4,
+  "noteTitle" : "CIS-4360 TEST AGAIN",
+  "createDate" : "Sat Apr 04 00:13:48 2020",
+  "modifyDate" : "Sat Apr 04 00:13:48 2020",
+  "tags" : [ "test" ],
+  "contents" : ""
+} ]
