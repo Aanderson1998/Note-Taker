@@ -23,7 +23,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.example.demo.model.Note;
 
 @RestController
-@CrossOrigin(origins = "{*}")
+@CrossOrigin(origins = "*")
 public class NotesController {
 	private NotesLoader loader;
 	private NotesHandler handler;
