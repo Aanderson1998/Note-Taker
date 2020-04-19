@@ -28,7 +28,7 @@ function handleUpdateErrors(response) {
     
     
 function ContentArea() {
-    const [note] = useContext(NoteContext);
+    const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
 
     const saveNote = () => {
         // call api to update current note and hide the update button
@@ -54,6 +54,8 @@ function ContentArea() {
                     return data;
                 });
         alert("note has been saved");
+        // updates the local copy of notes
+        fetchNotes();
     };
     
     const deleteNote = () => {
@@ -89,47 +91,41 @@ function ContentArea() {
         };
     };
 
-    // Only shows the button if a change was made
-    // let saveButton = "";
-    // if (wasChangeMade) {
-    //     saveButton = <button onClick={saveNote} className="btn-save">Save</button>
-    // }
-    
+    const removeTag = (tag) => {
+        console.log('remove tag:', tag);
+        let newTags = note.tags.filter(t => t !== tag);
+        note.tags = newTags;
+
+        let temp = {
+            id: note.id,
+            title: note.title,
+            content: note.content,
+            tags: newTags
+        };
+        setNote(temp);
+        console.log(note);
+    };
+
+    const addTag = () => {};
+
     return(note !== undefined ? (
             <div className="content-area">
                 <h2>{note.title}</h2>
                 <MarkdownViewer />
-                <button className="btn-delete" onClick={deleteNote}>delete</button>
                 <MarkdownEditor />
+
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
-                                        <span className="tags" key={index}>{tag}</span>
-                                            ))}
-            
+                        <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
+                    ))}
                 </div>
+
+                {/* update and delete buttons */}
                 <button onClick={saveNote} className="btn-save">Save</button>
+                <button className="btn-delete" onClick={deleteNote}>delete</button>
             </div>
             ) : <p className="no-note">No note currently selected</p>);
-
-    return(
-            <div className="content-area">
-                <h2>{note.title}</h2>
-                <MarkdownViewer />
-                <button className="btn-delete" onClick="{deleteNote}">delete</button>
-                <MarkdownEditor />
-                <div className="tags-container">
-                    <p>Tags: </p>
-                    {note.tags.map((tag, index) => (
-                                        <span className="tags" key={index}>{tag}</span>
-                                            ))}
-            
-                </div>
-                <button onClick={saveNote} className="btn-save">Save</button>
-            </div>
-            );
-
-
 }
 
 export default ContentArea;

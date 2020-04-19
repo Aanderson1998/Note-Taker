@@ -15,29 +15,17 @@ const NoteContextProvider = (props) => {
     
 
     const fetchNotes = () => {
-        let temp = [
-            {
-                "id": "1",
-                "title": "Note 1",
-                "content": "#### Random gen\nHe turned in the research paper on Friday; otherwise, he would have not passed the class.",
-                "tags": ["work", "school"]
-            },
-            {
-                "id": "2",
-                "title": "Note 2",
-                "content": "Organic marfa portland authentic direct trade semiotics fanny pack tumeric. Cardigan sustainable gochujang readymade. Selfies trust fund taiyaki bespoke meditation cloud bread keytar chicharrones aesthetic master cleanse asymmetrical twee.",
-                "tags": ["school"]
-            },
-            {
-                "id": "3",
-                "title": "Cat",
-                "content": "##### Here is a cat\n![some cat](https://img.waterreporter.org/4140df8813a64373917f50b6fb04bd48_thumbnail.jpg)",
-                "tags": []
-            }
-        ];
-        // will be replaced with initial notes from server
-        setNotes(temp);
-        setFilterResults(temp);
+        console.log('fetch notes');
+        fetch('http://localhost:8080/get_all')
+        .then(res => res.json())
+        .then(data => {
+            setNotes(data);
+            setFilterResults(data);
+        })
+        .catch(err => {
+            // unable to get notes
+            throw err;
+        });
     };
 
     // holds the notes that matched the filter
@@ -45,16 +33,30 @@ const NoteContextProvider = (props) => {
 
     // is called whenever filterBy is changed
     const filterNotes = (filter) => {
-        const results = notes.filter(value => 
-            value.title.toLowerCase().includes(filter.search.toLowerCase()) || value.content.toLowerCase().includes(filter.search.toLowerCase())
-        );
-        
+        let results = [];
+        // check each tag for a match
+        if (filter.tags) {
+            for (let i = 0; i < notes.length; i++) {
+                let note = notes[i];
+                for (let j = 0; j < notes[i].tags.length; j++) {
+                    if (note.tags[j].toLowerCase().includes(filter.search.toLowerCase())) {
+                        results.push(note);
+                    }
+                }
+            }
+        } else {
+            // check the note title and contents for a match
+            results = notes.filter(value => 
+                value.noteTitle.toLowerCase().includes(filter.search.toLowerCase()) || 
+                value.contents.toLowerCase().includes(filter.search.toLowerCase())
+            );
+        }
         setFilterResults(results);
     };
 
 
     return(
-        <NoteContext.Provider value={[note, setNote, filterNotes, filterResults]}>
+        <NoteContext.Provider value={[note, setNote, filterNotes, filterResults, fetchNotes]}>
             {props.children}
         </NoteContext.Provider>
     );

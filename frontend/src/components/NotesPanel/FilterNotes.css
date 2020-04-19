@@ -1,9 +1,3 @@
-.filter-notes {
-    margin-bottom: 1em;
-}
-
-.filter-notes input {
-    padding: 10px;
-    border-radius: 0.2em;
-    border: 1px solid black;
+.filter-form {
+    color: white;
 }
