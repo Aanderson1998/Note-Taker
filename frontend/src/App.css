@@ -1,0 +1,28 @@
+html, body {
+    overflow-y: hidden;
+    margin-bottom: 20em;
+    height: 100vh;
+}
+
+/* scroll bar theme */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #3b3b3b;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: rgb(223, 223, 223);
+    height: 80px;
+    border-radius: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
