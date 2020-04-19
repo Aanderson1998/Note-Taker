@@ -1,8 +1,22 @@
 .notes-container {
-    height: 100%;
+    height: 80vh;
+    /* background-color: red; */
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+    margin-bottom: 1em;
 }
 
 .notes-container h3 {
     padding: 0;
     margin: 0;
+}
+
+.note-tab {
+    margin: 1em 0;
+}
+
+.note-tab h3 {
+    color: white;
+    font-size: 20px;
 }

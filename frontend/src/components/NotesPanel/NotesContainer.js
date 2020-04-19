@@ -8,7 +8,7 @@ import './NotesContainer.css';
 import { NoteContext } from '../../contexts/NoteContext';
 
 function NotesContainer({notes, updateNoteToDisplay}) {
-    const MAX_CONTENT_LENGTH = 80;
+    const MAX_CONTENT_LENGTH = 70;
     const [note, setNote, filterNotes, filterResults] = useContext(NoteContext);
 
     const handleClick = (n) => {
@@ -34,12 +34,17 @@ function NotesContainer({notes, updateNoteToDisplay}) {
 
     if (filterResults.length > 0) {
         return(
-            <div className="notes-container" >
+            <div className="notes-container" id='scrollbar' >
                 {filterResults.map((data, index) => {
                     if (!data.contentTrimmed)
-                        data.contentTrimmed = trimContent(data.content);
+                        data.contentTrimmed = trimContent(data.contents);
                     
-                    return <Note key={index} index={index} note={data} updateIndex={() => handleClick({id: data.id, title: data.title, content: data.content, tags: data.tags})} />;
+                    return(
+                        <div className='note-tab' key={index}>
+                            <h3>{data.noteTitle}</h3>
+                            <Note  index={index} note={data} updateIndex={() => handleClick({id: data.id, title: data.noteTitle, content: data.contents, tags: data.tags})} />
+                        </div>
+                    )
                 })}
             </div>
         );
