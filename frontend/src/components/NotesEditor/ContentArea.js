@@ -50,10 +50,10 @@ function ContentArea() {
         }).then(handleUpdateErrors)
                 .then(response => response.json())
                 .then(data => {
+                    alert("note has been saved");
                     console.log(data);
                     return data;
                 });
-        alert("note has been saved");
         // updates the local copy of notes
         fetchNotes();
     };

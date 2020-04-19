@@ -31,11 +31,14 @@ and open the template in the editor.
     overflow:scroll;
 }
 
+#deleteModal #msg{
+    padding-top:20px;
+}
 
 #deleteModal #close{
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     font-size: 30px;
     font-weight: bold;
     transition: 0.3s;

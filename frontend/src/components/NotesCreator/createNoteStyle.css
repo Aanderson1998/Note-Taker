@@ -53,8 +53,8 @@ and open the template in the editor.
 
 #close {
     position: absolute;
-    top: 15px;
-    right: 35px;
+    top: 0px;
+    right: 0px;
     font-size: 40px;
     font-weight: bold;
     transition: 0.3s;
