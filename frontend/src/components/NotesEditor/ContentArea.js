@@ -89,6 +89,43 @@ function ContentArea() {
             deleteAlert.style.display = "none";
         };
     };
+    
+    const addTag = () => {
+        console.log("in tag function");
+        let tagModal = document.getElementById("tagModal");
+        console.log(tagModal);
+        tagModal.style.display = "block";
+        let children = tagModal.childNodes;
+
+        let addBtn = children[2];
+        let closeBtn = children[3];
+        
+        addBtn.onclick = () => {
+            let tag = children[1].value;
+            console.log('adding tag:', tag);
+            let newTags = note.tags;
+            newTags.push(tag);
+            
+            note.tags = newTags;
+
+            let temp = {
+                id: note.id,
+                title: note.title,
+                content: note.content,
+                tags: newTags
+            };
+            setNote(temp);
+            children[1].value = "";
+            children[1].value = "";
+            tagModal.style.display = "none";
+        };
+        
+        closeBtn.onclick = () => {
+            console.log("closing function");
+            children[1].value = "";
+            tagModal.style.display = "none";
+        };
+    };
 
     const removeTag = (tag) => {
         console.log('remove tag:', tag);
@@ -104,22 +141,18 @@ function ContentArea() {
         setNote(temp);
     };
 
-    const addTag = () => {};
-
     return(note !== undefined ? (
             <div className="content-area">
                 <h2>{note.title}</h2>
                 <MarkdownViewer />
                 <MarkdownEditor />
-
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
                             <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
                         ))}
                 </div>
-
-                {/* update and delete buttons */}
+                <div><button onClick={addTag} className="btn-tag">Add Tag</button></div>
                 <button onClick={saveNote} className="btn-save">Save</button>
                 <button className="btn-delete" onClick={deleteNote}>delete</button>
             </div>

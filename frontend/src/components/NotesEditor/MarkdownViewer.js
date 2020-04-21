@@ -8,7 +8,7 @@ function MarkdownViewer() {
 
     const parseMarkdown = () => {
         return {__html: marked.parse(note.content)};
-    }
+    };
     return(
         <div dangerouslySetInnerHTML={parseMarkdown()}></div>
     );
