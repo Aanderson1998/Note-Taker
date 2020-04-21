@@ -40,8 +40,11 @@ function SideNavbar() {
     };
 
     const showNote = () => {
-        var note = document.getElementById("form");
+        let note = document.getElementById("form");
         note.style.display = "block";
+        let body = document.getElementById("app");
+        body.style.pointerEvents="none";
+        note.style.pointerEvents = "all";
         return;
     };
 
@@ -67,7 +70,7 @@ function SideNavbar() {
             let mobileBtn = document.getElementById('menuBtn');
             mobileBtn.style.color = "rgb(238, 238, 238)";
         }
-    }
+    };
 
     return(
         <div className="sidebar-container">
