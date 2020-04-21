@@ -9,6 +9,7 @@ import ContentArea from './NotesEditor/ContentArea';
 import {NoteContextProvider} from '../contexts/NoteContext';
 import NoteForm from '../components/NotesCreator/createNote';
 import DeleteForm from '../components/NotesRemover/deleteNote';
+import AddTagsForm from './NotesEditor/addTags';
 import './ContentContainer.css';
 
 function ContentContainer() {
@@ -28,6 +29,7 @@ function ContentContainer() {
                     <NotesContainer />
                     <NoteForm/>
                     <DeleteForm/>
+                    <AddTagsForm/>
                 </div>
                 <ContentArea  />
             </NoteContextProvider>
