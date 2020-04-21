@@ -23,8 +23,9 @@ function makeRequest(title, content, tags, callback) {
     console.log(content);
     console.log(tags);
     //parse tags string by , and put values into an array
-    tags = tags.split(" ").join("");
-    let tagsList = tags.split(",");
+    let tagsList = [];
+    if(tags.length > 0)
+        tagsList = tags.split(",");
     console.log(tagsList);
     //create unique id
     const {v4: uuidv4} = require('uuid');
@@ -60,7 +61,8 @@ export default function NoteForm() {
     const {value: Content, bind: bindContent, reset: resetContent} = useInput("");
     const {value: Tags, bind: bindTags, reset: resetTags} = useInput("");
 
-    const [note, setNote, filterNotes, filterResults, fetchNotes, notes] = useContext(NoteContext);
+    // allows the use of the fetchNotes from the NoteContext
+    const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
     
 
     const handleClose = evt => {
