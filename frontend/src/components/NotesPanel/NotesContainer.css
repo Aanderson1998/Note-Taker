@@ -1,9 +1,5 @@
 .notes-container {
-    max-height: calc(100vh - 260px);
-    overflow-y: auto;
-    overflow-x: hidden;
     padding-right: 6px;
-    box-sizing: border-box;
 }
 
 .notes-container h3 {
