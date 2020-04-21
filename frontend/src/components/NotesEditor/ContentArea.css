@@ -5,9 +5,7 @@
     height: 100%;
     max-width: 1000px;
     width: 100%;
-    padding: 0 1em;
-    margin: 0 auto;
-    display: block;
+    padding: 1em;
 }
 
 .content-area textarea {

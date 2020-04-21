@@ -11,29 +11,29 @@ import './ContentArea.css';
 import { NoteContext } from '../../contexts/NoteContext';
 
 function handleUpdateErrors(response) {
-        if (!response.ok) {
-            console.log("error calling api");
-            alert("note could not be updated");
-        }
-        return response;
-    };
+    if (!response.ok) {
+        console.log("error calling api");
+        alertify.error('Note could not be updated');
+    }
+    return response;
+};
     
-    function handleDeleteErrors(response) {
-        if (!response.ok) {
-            console.log("error calling api");
-            alert("note could not be deleted");
-        }
-        return response;
-    };
+function handleDeleteErrors(response) {
+    if (!response.ok) {
+        console.log("error calling api");
+        alertify.error('Note could not be deleted');
+    }
+    return response;
+};
     
     
 function ContentArea() {
     const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
-
-    const [title, setTitle] = useState("");
+    const [noteSaving, setNoteSaving] = useState(false);
 
     const saveNote = () => {
         // call api to update current note and hide the update button
+        setNoteSaving(true);
         console.log("save the current working note in the context");
         let data = {"noteTitle": note.title,
             "tags": note.tags,
@@ -52,12 +52,12 @@ function ContentArea() {
         }).then(handleUpdateErrors)
                 .then(response => response.json())
                 .then(data => {
-                    alert("note has been saved");
+                    alertify.success("Note has been saved");
                     console.log(data);
                     // updates the local copy of notes
                     fetchNotes();
                     return data;
-                });
+                }).finally(() => {setNoteSaving(false)});
     };
     
     const deleteNote = () => {
@@ -145,14 +145,11 @@ function ContentArea() {
 
     return(note !== undefined ? (
             <div className="content-area">
-                <div className="update-title">
-                    <input type="text" value={note.title} disabled={true} />
-                    <i onClick={editTitle} className="material-icons">edit</i>
-                </div>
                 
-                {/* <h2>{note.title} <i className="material-icons update-title">edit</i></h2> */}
+                
+                <h2>{note.title}</h2>
                 <MarkdownViewer />
-                <MarkdownEditor />
+                <MarkdownEditor saveNote={saveNote} />
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
@@ -163,7 +160,12 @@ function ContentArea() {
                 {/* update and delete buttons */}
                 <div className="buttons">
                     <button onClick={addTag} className="btn-tag">Add Tag</button>
-                    <button onClick={saveNote} className="btn-save">Save</button>
+                    {noteSaving ? (
+                        <button onClick={saveNote} className="btn-save" disabled={noteSaving}>Saving...</button>
+                    ) : (
+                        <button onClick={saveNote} className="btn-save" disabled={noteSaving}>Save</button>
+                    )}
+                    
                     <button className="btn-delete" onClick={deleteNote}>delete</button>
                 </div>
             </div>
