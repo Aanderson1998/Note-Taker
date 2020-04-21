@@ -1,0 +1,45 @@
+
+
+#tagModal {
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    color: black;
+    display:none;
+    position: fixed; 
+    z-index: 2; 
+    padding-top: 60px; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    width: 60vw; 
+    height: 20%; 
+    background-color: royalblue; 
+    margin:0 auto;
+    padding:10px;
+    font-size: 20px;
+    border: thick solid black;
+    overflow:scroll;
+}
+
+#tagModal #header{
+    padding-top:20px;
+    font-size:30px;
+}
+
+
+#tagModal #close{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+    background-color: #A5A7A3;
+}
+
+#tagModal #add{
+    background-color: #A5A7A3;
+    margin:10px;
+}

@@ -3,6 +3,7 @@ import {Navbar} from 'react-bootstrap';
 import ContentContainer from './components/ContentContainer';
 import NoteForm from './components/NotesCreator/createNote';
 import DeleteForm from './components/NotesRemover/deleteNote';
+import AddTagsForm from './components/NotesEditor/addTags';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
