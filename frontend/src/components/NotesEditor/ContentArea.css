@@ -30,6 +30,10 @@
     color: white;
 }
 
+.content-area img {
+    max-width: 100%;;
+}
+
 .no-note {
     width: 100%;
     text-align: center;

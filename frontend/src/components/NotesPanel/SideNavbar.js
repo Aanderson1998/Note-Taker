@@ -12,6 +12,7 @@ function SideNavbar() {
     const sidebarNavRef = useRef(null);
 
     const [hideSidebar, setHideSidebar] = useState(false);
+    const [changeHeightOnce, setChangeHeightOnce] = useState(false);
 
     useEffect(() => {
         updateHeight();
@@ -34,7 +35,10 @@ function SideNavbar() {
 
         let contentArea = document.getElementsByClassName('content-area');
         if (contentArea[0] !== undefined) {
-            contentArea[0].style.height = height;
+            if (!changeHeightOnce) {
+                contentArea[0].style.height = height;
+                setChangeHeightOnce(true);
+            }
             
         }
     };
