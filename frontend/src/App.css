@@ -1,6 +1,12 @@
+@font-face {
+  font-family: 'Lobster';
+  src: url("../Lobster-Regular.ttf");
+}
+
 html, body {
     height: 100vh;
     font-family: 'Roboto', sans-serif;
+    overflow: hidden;
 }
 
 /* scroll bar theme */

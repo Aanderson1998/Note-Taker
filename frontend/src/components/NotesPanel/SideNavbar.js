@@ -14,6 +14,8 @@ function SideNavbar() {
     const [hideSidebar, setHideSidebar] = useState(false);
 
     useEffect(() => {
+        updateHeight();
+
         window.addEventListener('resize', () => {
             // make sure the sidebar is open
             if (window.innerWidth > 750) {
@@ -22,8 +24,20 @@ function SideNavbar() {
                 sidebarRef.current.style.visibility = "visible";
                 sidebarNavRef.current.classList.remove('sidebar-nav-hide');
             }
+            updateHeight();
         });
     }, []);
+
+    const updateHeight = () => {
+        let height = window.innerHeight + "px";
+        sidebarNavRef.current.style.height = height;
+
+        let contentArea = document.getElementsByClassName('content-area');
+        if (contentArea[0] !== undefined) {
+            // contentArea[0].style.height = height;
+            
+        }
+    };
 
     const showNote = () => {
         var note = document.getElementById("form");
@@ -41,11 +55,17 @@ function SideNavbar() {
             setHideSidebar(true);
             sidebarRef.current.style.position = "absolute";
             sidebarRef.current.style.visibility = "hidden";
+            
+            let mobileBtn = document.getElementById('menuBtn');
+            mobileBtn.style.color = "rgb(49, 49, 49)";
         } else {
             setHideSidebar(false);
             sidebarRef.current.style.position = "relative";
             sidebarRef.current.style.visibility = "visible";
             sidebarNavRef.current.classList.remove('sidebar-nav-hide');
+
+            let mobileBtn = document.getElementById('menuBtn');
+            mobileBtn.style.color = "rgb(238, 238, 238)";
         }
     }
 

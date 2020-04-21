@@ -4,7 +4,7 @@
  tags.
  */
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import MarkdownViewer from './MarkdownViewer';
 import MarkdownEditor from './MarkdownEditor';
 import './ContentArea.css';
@@ -30,6 +30,18 @@ function handleDeleteErrors(response) {
 function ContentArea() {
     const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
     const [noteSaving, setNoteSaving] = useState(false);
+
+    const contentAreaRef = useRef(null);
+
+    // update the content area height
+    // helps for mobile so nothing gets cut off
+    useEffect(() => {
+        if (contentAreaRef.current !== null) {
+            let height = window.innerHeight + "px";
+            contentAreaRef.current.style.height = height;
+        }
+        
+    }, [note]);
 
     const saveNote = () => {
         // call api to update current note and hide the update button
@@ -144,9 +156,7 @@ function ContentArea() {
     };
 
     return(note !== undefined ? (
-            <div className="content-area">
-                
-                
+            <div ref={contentAreaRef} className="content-area">
                 <h2>{note.title}</h2>
                 <MarkdownViewer />
                 <MarkdownEditor saveNote={saveNote} />
