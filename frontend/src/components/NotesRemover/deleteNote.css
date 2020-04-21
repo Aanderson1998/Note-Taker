@@ -1,0 +1,51 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2020, 6:59:50 PM
+    Author     : aryannaanderson
+*/
+
+#deleteModal {
+    font-family: sans-serif;
+    text-align: center;
+    position: relative;
+    display: none;
+    color: black;
+    position: fixed; 
+    z-index: 2; 
+    padding-top: 60px; 
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    width: 60vw; 
+    height: 20%; 
+    background-color: royalblue; 
+    margin:0 auto;
+    padding:10px;
+    font-size: 20px;
+    border: thick solid black;
+    overflow:scroll;
+}
+
+#deleteModal #msg{
+    padding-top:20px;
+}
+
+#deleteModal #close{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    font-size: 30px;
+    font-weight: bold;
+    transition: 0.3s;
+    background-color: #A5A7A3;
+}
+
+#deleteModal #submit{
+    background-color: #A5A7A3;
+    margin:10px;
+}

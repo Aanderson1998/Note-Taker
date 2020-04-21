@@ -1,0 +1,21 @@
+.notes-container {
+    max-height: calc(100vh - 260px);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 6px;
+    box-sizing: border-box;
+}
+
+.notes-container h3 {
+    padding: 0;
+    margin: 0;
+}
+
+.note-tab {
+    margin: 1em 0;
+}
+
+.note-tab h3 {
+    color: white;
+    font-size: 20px;
+}

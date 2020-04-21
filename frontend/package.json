@@ -1,0 +1,40 @@
+{
+  "name": "Notes-Taker",
+  "version": "1.0.0",
+  "description": "Final Project for CIS-4360",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jsndng408/Notes-Taker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jsndng408/Notes-Taker/issues"
+  },
+  "homepage": "https://github.com/Jsndng408/Notes-Taker#readme",
+  "dependencies": {
+    "bootstrap": "^4.4.1",
+    "marked": "^0.8.2",
+    "parcel-bundler": "^1.12.4",
+    "react": "^16.13.1",
+    "react-bootstrap": "^1.0.0",
+    "react-dom": "^16.13.1",
+    "uuid": "^7.0.2"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0"
+  }
+}

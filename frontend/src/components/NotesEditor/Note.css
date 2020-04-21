@@ -1,0 +1,20 @@
+.note {
+    padding: 1em 1em;
+    cursor: pointer;
+    transition: 0.4s background-color;
+    background-color:whitesmoke;
+    border:thick solid #C8C9CB;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.note:hover {
+    background-color: #C8C9C6;
+}
+
+.note:nth-child(2) {
+    border-top: 1px solid rgb(145, 145, 145);
+    border-bottom: 1px solid rgb(145, 145, 145);
+}
