@@ -115,9 +115,13 @@ function ContentArea() {
         
         addBtn.onclick = () => {
             let tag = children[1].value;
+            tag = tag.trim();
             console.log('adding tag:', tag);
             let newTags = note.tags;
-            newTags.push(tag);
+            console.log(newTags);
+            if(newTags.indexOf(tag) === -1) {
+                newTags.push(tag);
+            }
             
             note.tags = newTags;
 
@@ -128,7 +132,6 @@ function ContentArea() {
                 tags: newTags
             };
             setNote(temp);
-            children[1].value = "";
             children[1].value = "";
             body.style.pointerEvents="all";
             tagModal.style.display = "none";
