@@ -13,7 +13,7 @@ import { useInput } from "./inputHook";
 function handleCreateErrors(response) {
         if (!response.ok) {
             console.log("invalid call to api");
-            alert("note could not be created");
+            alertify.error('Note could not be created');
         }
         return response;
     }
@@ -51,6 +51,7 @@ function makeRequest(title, content, tags, callback) {
             .then(data => {
                 console.log(data);
                 callback();
+                alertify.success("Note created");
                 return data;
             });
 }
@@ -91,7 +92,7 @@ export default function NoteForm() {
         }
         //sending note to function that will handle request
         else {
-            alert(`Submitting Note: ${Title}`);
+            // alert(`Submitting Note: ${Title}`);
             // added fetchNotes callback to allow working copy of notes to update without a page refresh
             makeRequest(Title, Content, Tags, fetchNotes);
         }
