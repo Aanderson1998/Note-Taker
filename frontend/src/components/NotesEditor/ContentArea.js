@@ -61,8 +61,12 @@ function ContentArea() {
     const deleteNote = () => {
         let deleteAlert = document.getElementById("deleteModal");
         deleteAlert.style.display = "block";
-        let children = deleteAlert.childNodes;
         
+        let body = document.getElementById("app");
+        body.style.pointerEvents="none";
+        deleteAlert.style.pointerEvents = "all";
+           
+        let children = deleteAlert.childNodes;
         let okBtn = children[1];
         let closeBtn = children[2];
         
@@ -81,11 +85,14 @@ function ContentArea() {
                         fetchNotes();
                         return data;
                     });
+            body.style.pointerEvents="all";
             deleteAlert.style.display = "none";
+            fetchNotes();
         };
         
         closeBtn.onclick = () => {
             console.log("closing function");
+            body.style.pointerEvents="all";
             deleteAlert.style.display = "none";
         };
     };
@@ -95,8 +102,12 @@ function ContentArea() {
         let tagModal = document.getElementById("tagModal");
         console.log(tagModal);
         tagModal.style.display = "block";
+        
+        let body = document.getElementById("app");
+        body.style.pointerEvents="none";
+        tagModal.style.pointerEvents = "all";
+        
         let children = tagModal.childNodes;
-
         let addBtn = children[2];
         let closeBtn = children[3];
         
@@ -117,12 +128,14 @@ function ContentArea() {
             setNote(temp);
             children[1].value = "";
             children[1].value = "";
+            body.style.pointerEvents="all";
             tagModal.style.display = "none";
         };
         
         closeBtn.onclick = () => {
             console.log("closing function");
             children[1].value = "";
+            body.style.pointerEvents="all";
             tagModal.style.display = "none";
         };
     };

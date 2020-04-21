@@ -70,6 +70,8 @@ export default function NoteForm() {
         resetTitle();
         resetContent();
         resetTags();
+        let body = document.getElementById("app");
+        body.style.pointerEvents="all";
         document.getElementById("form").style.display = "none";
         return;
     }
@@ -97,6 +99,8 @@ export default function NoteForm() {
         resetTitle();
         resetContent();
         resetTags();
+        let body = document.getElementById("app");
+        body.style.pointerEvents="all";
         document.getElementById("form").style.display = "none";
     };
 
