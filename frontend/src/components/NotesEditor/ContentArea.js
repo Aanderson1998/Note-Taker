@@ -52,11 +52,10 @@ function ContentArea() {
                 .then(data => {
                     alert("note has been saved");
                     console.log(data);
+                    // updates the local copy of notes
                     fetchNotes();
                     return data;
                 });
-        // updates the local copy of notes
-        fetchNotes();
     };
     
     const deleteNote = () => {
@@ -116,8 +115,8 @@ function ContentArea() {
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
-                        <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
-                    ))}
+                            <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
+                        ))}
                 </div>
 
                 {/* update and delete buttons */}
