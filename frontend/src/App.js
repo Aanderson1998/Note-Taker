@@ -10,12 +10,12 @@ import './App.css';
 export default function App() {
     return(
             <div id="app">
-                <Navbar bg="dark" variant="dark">
+                {/* <Navbar bg="dark" variant="dark">
                     <Navbar.Brand>Note Taker++</Navbar.Brand>
-                </Navbar>
+                </Navbar> */}
                 <ContentContainer />
-                <NoteForm/>
-                <DeleteForm/>
+                {/* <NoteForm/>
+                <DeleteForm/> */}
             </div>
             );
 }

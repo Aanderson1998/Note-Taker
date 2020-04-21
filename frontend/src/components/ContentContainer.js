@@ -9,23 +9,16 @@ import ContentArea from './NotesEditor/ContentArea';
 import {NoteContextProvider} from '../contexts/NoteContext';
 import NoteForm from '../components/NotesCreator/createNote';
 import DeleteForm from '../components/NotesRemover/deleteNote';
+import SideNavbar from './NotesPanel/SideNavbar';
 import './ContentContainer.css';
 
 function ContentContainer() {
-    
-    const showNote = () => {
-        var note = document.getElementById("form");
-        note.style.display = "block";
-        return;
-    };
-    
     return(
         <div className="content-container">
             <NoteContextProvider>
                 <div>
-                    <FilterNotes />
-                    <button onClick={showNote}>Create Note</button>
-                    <NotesContainer />
+                    <SideNavbar />
+                    
                     <NoteForm/>
                     <DeleteForm/>
                 </div>

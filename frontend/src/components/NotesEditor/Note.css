@@ -1,20 +1,21 @@
 .note {
+    height: 100px;
     padding: 1em 1em;
     cursor: pointer;
     transition: 0.4s background-color;
-    background-color:whitesmoke;
-    border:thick solid #C8C9CB;
-
+    color: rgb(194, 194, 194);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.note:hover {
-    background-color: #C8C9C6;
+.note > h3 {
+    font-size: 24px;
+    position: relative;
+    left: -10px;
+    color: white;
 }
 
 .note:nth-child(2) {
-    border-top: 1px solid rgb(145, 145, 145);
-    border-bottom: 1px solid rgb(145, 145, 145);
+    border-bottom: 1px solid rgb(126, 126, 126);
 }

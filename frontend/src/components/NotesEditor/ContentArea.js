@@ -30,6 +30,8 @@ function handleUpdateErrors(response) {
 function ContentArea() {
     const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
 
+    const [title, setTitle] = useState("");
+
     const saveNote = () => {
         // call api to update current note and hide the update button
         console.log("save the current working note in the context");
@@ -104,11 +106,18 @@ function ContentArea() {
         setNote(temp);
     };
 
-    const addTag = () => {};
+    const editTitle = () => {
+        console.log('edit title');
+    };
 
     return(note !== undefined ? (
             <div className="content-area">
-                <h2>{note.title}</h2>
+                <div className="update-title">
+                    <input type="text" value={note.title} disabled={true} />
+                    <i onClick={editTitle} className="material-icons">edit</i>
+                </div>
+                
+                {/* <h2>{note.title} <i className="material-icons update-title">edit</i></h2> */}
                 <MarkdownViewer />
                 <MarkdownEditor />
 
@@ -120,8 +129,10 @@ function ContentArea() {
                 </div>
 
                 {/* update and delete buttons */}
-                <button onClick={saveNote} className="btn-save">Save</button>
-                <button className="btn-delete" onClick={deleteNote}>delete</button>
+                <div className="buttons">
+                    <button onClick={saveNote} className="btn-save">Save</button>
+                    <button className="btn-delete" onClick={deleteNote}>delete</button>
+                </div>
             </div>
             ) : <p className="no-note">No note currently selected</p>);
 }
