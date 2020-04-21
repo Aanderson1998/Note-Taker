@@ -4,34 +4,48 @@
  tags.
  */
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import MarkdownViewer from './MarkdownViewer';
 import MarkdownEditor from './MarkdownEditor';
 import './ContentArea.css';
 import { NoteContext } from '../../contexts/NoteContext';
 
 function handleUpdateErrors(response) {
-        if (!response.ok) {
-            console.log("error calling api");
-            alert("note could not be updated");
-        }
-        return response;
-    };
+    if (!response.ok) {
+        console.log("error calling api");
+        alertify.error('Note could not be updated');
+    }
+    return response;
+};
     
-    function handleDeleteErrors(response) {
-        if (!response.ok) {
-            console.log("error calling api");
-            alert("note could not be deleted");
-        }
-        return response;
-    };
+function handleDeleteErrors(response) {
+    if (!response.ok) {
+        console.log("error calling api");
+        alertify.error('Note could not be deleted');
+    }
+    return response;
+};
     
     
 function ContentArea() {
     const [note, setNote, filterNotes, filterResults, fetchNotes] = useContext(NoteContext);
+    const [noteSaving, setNoteSaving] = useState(false);
+
+    const contentAreaRef = useRef(null);
+
+    // update the content area height
+    // helps for mobile so nothing gets cut off
+    useEffect(() => {
+        if (contentAreaRef.current !== null) {
+            let height = window.innerHeight + "px";
+            contentAreaRef.current.style.height = height;
+        }
+        
+    }, [note]);
 
     const saveNote = () => {
         // call api to update current note and hide the update button
+        setNoteSaving(true);
         console.log("save the current working note in the context");
         let data = {"noteTitle": note.title,
             "tags": note.tags,
@@ -50,19 +64,23 @@ function ContentArea() {
         }).then(handleUpdateErrors)
                 .then(response => response.json())
                 .then(data => {
-                    alert("note has been saved");
+                    alertify.success("Note has been saved");
                     console.log(data);
                     // updates the local copy of notes
                     fetchNotes();
                     return data;
-                });
+                }).finally(() => {setNoteSaving(false)});
     };
     
     const deleteNote = () => {
         let deleteAlert = document.getElementById("deleteModal");
         deleteAlert.style.display = "block";
-        let children = deleteAlert.childNodes;
         
+        let body = document.getElementById("app");
+        body.style.pointerEvents="none";
+        deleteAlert.style.pointerEvents = "all";
+           
+        let children = deleteAlert.childNodes;
         let okBtn = children[1];
         let closeBtn = children[2];
         
@@ -81,11 +99,14 @@ function ContentArea() {
                         fetchNotes();
                         return data;
                     });
+            body.style.pointerEvents="all";
             deleteAlert.style.display = "none";
+            fetchNotes();
         };
         
         closeBtn.onclick = () => {
             console.log("closing function");
+            body.style.pointerEvents="all";
             deleteAlert.style.display = "none";
         };
     };
@@ -95,16 +116,24 @@ function ContentArea() {
         let tagModal = document.getElementById("tagModal");
         console.log(tagModal);
         tagModal.style.display = "block";
+        
+        let body = document.getElementById("app");
+        body.style.pointerEvents="none";
+        tagModal.style.pointerEvents = "all";
+        
         let children = tagModal.childNodes;
-
         let addBtn = children[2];
         let closeBtn = children[3];
         
         addBtn.onclick = () => {
             let tag = children[1].value;
+            tag = tag.trim();
             console.log('adding tag:', tag);
             let newTags = note.tags;
-            newTags.push(tag);
+            console.log(newTags);
+            if(newTags.indexOf(tag) === -1) {
+                newTags.push(tag);
+            }
             
             note.tags = newTags;
 
@@ -116,13 +145,14 @@ function ContentArea() {
             };
             setNote(temp);
             children[1].value = "";
-            children[1].value = "";
+            body.style.pointerEvents="all";
             tagModal.style.display = "none";
         };
         
         closeBtn.onclick = () => {
             console.log("closing function");
             children[1].value = "";
+            body.style.pointerEvents="all";
             tagModal.style.display = "none";
         };
     };
@@ -142,19 +172,31 @@ function ContentArea() {
     };
 
     return(note !== undefined ? (
-            <div className="content-area">
-                <h2>{note.title}</h2>
+            <div ref={contentAreaRef} className="content-area">
+                {/* <h2>{note.title}</h2> */}
+                <div className="note-title">
+                    {note.title}
+                </div>
                 <MarkdownViewer />
-                <MarkdownEditor />
+                <MarkdownEditor saveNote={saveNote} />
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
                             <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
                         ))}
                 </div>
-                <div><button onClick={addTag} className="btn-tag">Add Tag</button></div>
-                <button onClick={saveNote} className="btn-save">Save</button>
-                <button className="btn-delete" onClick={deleteNote}>delete</button>
+
+                {/* update and delete buttons */}
+                <div className="buttons">
+                    <button onClick={addTag} className="btn-tag">Add Tag</button>
+                    {noteSaving ? (
+                        <button onClick={saveNote} className="btn-save" disabled={noteSaving}>Saving...</button>
+                    ) : (
+                        <button onClick={saveNote} className="btn-save" disabled={noteSaving}>Save</button>
+                    )}
+                    
+                    <button className="btn-delete" onClick={deleteNote}>delete</button>
+                </div>
             </div>
             ) : <p className="no-note">No note currently selected</p>);
 }

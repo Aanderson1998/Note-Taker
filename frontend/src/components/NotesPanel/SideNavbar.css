@@ -1,0 +1,83 @@
+.sidebar {
+    position: relative;
+    min-width: 300px;
+    width: 100%;
+    margin: 0;
+}
+
+.sidebar-nav {
+    background-color: rgb(32, 32, 32);
+    height: 100%;
+    max-width: 400px;
+    padding: 0.4em 0.8em 0 0.8em;
+    overflow-y: auto;
+    position: relative;
+    left: 0;
+    transition: all 0.5s;
+    margin: 0;
+    margin-bottom: 1.2em;
+}
+
+.sidebar-nav h1 {
+    color: rgb(243, 243, 243);
+    margin-bottom: 1em;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgb(122, 122, 122);
+    font-family: 'Lobster';
+    text-align: center;
+    font-size: 42px;
+}
+
+.sidebar-nav .nav-buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sidebar-nav .nav-buttons button{
+    padding: 0.2em 0.8em;
+    border-radius: 6px;
+    background-color:#688af0;
+    color: rgb(243, 243, 243);
+    border: 1px solid rgb(75, 75, 75);
+    min-width: 114px;
+}
+
+.sidebar-container {
+    position: relative;
+    width: 100%;
+}
+
+#menuBtn {
+    display: none;
+    margin: 0;
+    z-index: 3;
+    position: absolute;
+    right: 14px;
+    top: 10px;
+    color: rgb(238, 238, 238);
+    font-size: 40px;
+    cursor: pointer;
+    transition: color 1s;
+}
+
+.sidebar-nav-hide {
+    left: -1000px;
+}
+
+@media only screen and (max-width: 750px) {
+    .sidebar {
+        width: 100%;
+        position: fixed;
+    }
+
+    .sidebar-nav {
+        max-width: 100%;
+    }
+
+    
+
+    #menuBtn {
+        position: fixed;
+        display: block;
+    }
+}

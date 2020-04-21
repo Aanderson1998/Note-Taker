@@ -1,6 +1,13 @@
 .content-area {
-    color:white;
+    color:rgb(49, 49, 49);
     padding-right: 10px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    /* height: 100%; */
+    max-width: 1000px;
+    width: 100%;
+    padding: 1em;
+    margin: 0 auto;
 }
 
 .content-area textarea {
@@ -24,10 +31,10 @@
 }
 
 .no-note {
+    width: 100%;
     text-align: center;
     font-size: 18px;
     padding-top: 2em;
-    color: white; 
 }
 
 .content-area .btn-save {
@@ -67,12 +74,45 @@
     cursor: default;
 }
 
+.tags-container{
+    margin-bottom: 10px;
+}
+
+.tags-container p {
+    margin: 0;
+    margin-right: 10px;
+}
+
 .tags {
-    /* position: relative; */
     display: flex;
 }
 .tags .delete-tag-btn {
     font-size: 24px;
     margin-left: 6px;
     cursor: pointer;
+}
+
+.update-title input {
+    max-width: 90%;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: white;
+    margin: 0 0 1em 0;
+    padding: 0;
+}
+
+.update-title i {
+    cursor: pointer;
+}
+
+.content-area .buttons button {
+    margin: 0.4em 0.8em;
+}
+
+.content-area > .note-title {
+    font-size: 30px;
+    padding-bottom: 10px;
+    margin-bottom: 1em;
+    word-wrap: break-word;
 }

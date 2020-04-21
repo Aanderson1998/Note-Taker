@@ -13,7 +13,7 @@ import { useInput } from "./inputHook";
 function handleCreateErrors(response) {
         if (!response.ok) {
             console.log("invalid call to api");
-            alert("note could not be created");
+            alertify.error('Note could not be created');
         }
         return response;
     }
@@ -26,7 +26,15 @@ function makeRequest(title, content, tags, callback) {
     let tagsList = [];
     if(tags.length > 0)
         tagsList = tags.split(",");
-    console.log(tagsList);
+
+    let uniqueTagsList = [];
+    for(let i=0; i < tagsList.length; i++){
+            tagsList[i] = tagsList[i].trim();
+            if(uniqueTagsList.indexOf(tagsList[i]) === -1) {
+                uniqueTagsList.push(tagsList[i]);
+            }
+        }
+    console.log(uniqueTagsList);
     //create unique id
     const {v4: uuidv4} = require('uuid');
     var id = uuidv4();
@@ -34,7 +42,7 @@ function makeRequest(title, content, tags, callback) {
     //creating jsonData to send to request
     let data = {"id": id, 
         "noteTitle": title,
-        "tags": tagsList,
+        "tags": uniqueTagsList,
         "contents": content};
     console.log(data);
     //setting request url
@@ -51,6 +59,7 @@ function makeRequest(title, content, tags, callback) {
             .then(data => {
                 console.log(data);
                 callback();
+                alertify.success("Note created");
                 return data;
             });
 }
@@ -70,6 +79,8 @@ export default function NoteForm() {
         resetTitle();
         resetContent();
         resetTags();
+        let body = document.getElementById("app");
+        body.style.pointerEvents="all";
         document.getElementById("form").style.display = "none";
         return;
     }
@@ -89,7 +100,7 @@ export default function NoteForm() {
         }
         //sending note to function that will handle request
         else {
-            alert(`Submitting Note: ${Title}`);
+            // alert(`Submitting Note: ${Title}`);
             // added fetchNotes callback to allow working copy of notes to update without a page refresh
             makeRequest(Title, Content, Tags, fetchNotes);
         }
@@ -97,6 +108,8 @@ export default function NoteForm() {
         resetTitle();
         resetContent();
         resetTags();
+        let body = document.getElementById("app");
+        body.style.pointerEvents="all";
         document.getElementById("form").style.display = "none";
     };
 
