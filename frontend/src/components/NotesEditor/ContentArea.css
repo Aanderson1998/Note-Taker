@@ -64,7 +64,6 @@
 
 .content-area .btn-delete:disabled {
     background-color: #965856;
-    
     cursor: default;
 }
 

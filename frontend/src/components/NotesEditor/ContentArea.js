@@ -89,20 +89,6 @@ function ContentArea() {
             deleteAlert.style.display = "none";
         };
     };
-
-    const removeTag = (tag) => {
-        console.log('remove tag:', tag);
-        let newTags = note.tags.filter(t => t !== tag);
-        note.tags = newTags;
-
-        let temp = {
-            id: note.id,
-            title: note.title,
-            content: note.content,
-            tags: newTags
-        };
-        setNote(temp);
-    };
     
     const addTag = () => {
         console.log("in tag function");
@@ -141,18 +127,32 @@ function ContentArea() {
         };
     };
 
+    const removeTag = (tag) => {
+        console.log('remove tag:', tag);
+        let newTags = note.tags.filter(t => t !== tag);
+        note.tags = newTags;
+
+        let temp = {
+            id: note.id,
+            title: note.title,
+            content: note.content,
+            tags: newTags
+        };
+        setNote(temp);
+    };
+
     return(note !== undefined ? (
             <div className="content-area">
                 <h2>{note.title}</h2>
                 <MarkdownViewer />
                 <MarkdownEditor />
-                <button onClick={addTag} className="btn-tag">Add Tag</button>
                 <div className="tags-container">
                     <p>Tags: </p>
                     {note.tags.map((tag, index) => (
                             <span className="tags" key={index}>{tag} <i onClick={() => removeTag(tag)} className="material-icons delete-tag-btn">clear</i></span>
                         ))}
                 </div>
+                <div><button onClick={addTag} className="btn-tag">Add Tag</button></div>
                 <button onClick={saveNote} className="btn-save">Save</button>
                 <button className="btn-delete" onClick={deleteNote}>delete</button>
             </div>
