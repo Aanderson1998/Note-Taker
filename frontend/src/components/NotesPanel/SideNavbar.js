@@ -34,7 +34,7 @@ function SideNavbar() {
 
         let contentArea = document.getElementsByClassName('content-area');
         if (contentArea[0] !== undefined) {
-            // contentArea[0].style.height = height;
+            contentArea[0].style.height = height;
             
         }
     };

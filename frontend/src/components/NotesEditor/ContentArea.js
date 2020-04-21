@@ -173,7 +173,10 @@ function ContentArea() {
 
     return(note !== undefined ? (
             <div ref={contentAreaRef} className="content-area">
-                <h2>{note.title}</h2>
+                {/* <h2>{note.title}</h2> */}
+                <div className="note-title">
+                    {note.title}
+                </div>
                 <MarkdownViewer />
                 <MarkdownEditor saveNote={saveNote} />
                 <div className="tags-container">
