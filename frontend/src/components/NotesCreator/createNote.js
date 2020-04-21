@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import React from "react";
+import React, {useContext} from "react";
+import { NoteContext } from '../../contexts/NoteContext';
 import "./createNoteStyle.css";
 
 //hook created to handle resetting values to empty after submission of note
@@ -17,7 +18,7 @@ function handleCreateErrors(response) {
         return response;
     }
 //function that takes input and sends it to server 
-function makeRequest(title, content, tags) {
+function makeRequest(title, content, tags, callback) {
     console.log(title);
     console.log(content);
     console.log(tags);
@@ -36,7 +37,7 @@ function makeRequest(title, content, tags) {
         "contents": content};
     console.log(data);
     //setting request url
-    let url = 'http://localhost:8080/create';
+    let url = 'http://3.16.13.233:8080/create';
     //doing fetch request to create new note in server
     fetch(url, {
         method: 'POST',
@@ -48,15 +49,18 @@ function makeRequest(title, content, tags) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                callback();
                 return data;
             });
-    }
+}
 
 export default function NoteForm() {
     //initializing title, content, and tag values
     const {value: Title, bind: bindTitle, reset: resetTitle} = useInput("");
     const {value: Content, bind: bindContent, reset: resetContent} = useInput("");
     const {value: Tags, bind: bindTags, reset: resetTags} = useInput("");
+
+    const [note, setNote, filterNotes, filterResults, fetchNotes, notes] = useContext(NoteContext);
     
 
     const handleClose = evt => {
@@ -84,7 +88,8 @@ export default function NoteForm() {
         //sending note to function that will handle request
         else {
             alert(`Submitting Note: ${Title}`);
-            makeRequest(Title, Content, Tags);
+            // added fetchNotes callback to allow working copy of notes to update without a page refresh
+            makeRequest(Title, Content, Tags, fetchNotes);
         }
         //resetting content in input boxes
         resetTitle();

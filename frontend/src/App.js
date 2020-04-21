@@ -10,7 +10,7 @@ import './App.css';
 export default function App() {
     return(
             <div id="app">
-                <Navbar bg="primary" variant="dark">
+                <Navbar bg="dark" variant="dark">
                     <Navbar.Brand>Note Taker++</Navbar.Brand>
                 </Navbar>
                 <ContentContainer />

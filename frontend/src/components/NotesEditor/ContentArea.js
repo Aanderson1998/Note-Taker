@@ -39,7 +39,7 @@ function ContentArea() {
         };
         console.log(data);
         //setting request url
-        let url = 'http://localhost:8080/update/' + note.id;
+        let url = 'http://3.16.13.233:8080/update/' + note.id;
         console.log("url: " + url);
         fetch(url, {
             method: 'PUT',
@@ -52,6 +52,7 @@ function ContentArea() {
                 .then(data => {
                     alert("note has been saved");
                     console.log(data);
+                    fetchNotes();
                     return data;
                 });
         // updates the local copy of notes
@@ -68,7 +69,7 @@ function ContentArea() {
         
         okBtn.onclick = () => {
             console.log("removing note " + note.id);
-            let url = 'http://localhost:8080/delete/' + note.id;
+            let url = 'http://3.16.13.233:8080/delete/' + note.id;
             console.log("url: " + url);
             fetch(url, {
                 method: 'DELETE',
@@ -76,13 +77,12 @@ function ContentArea() {
                     'Content-Type': 'application/json'
                 })
             }).then(handleDeleteErrors)
-                    .then(response => response.json())
                     .then(data => {
                         console.log(data);
+                        fetchNotes();
                         return data;
                     });
             deleteAlert.style.display = "none";
-            alert("note has been deleted");
         };
         
         closeBtn.onclick = () => {
@@ -103,7 +103,6 @@ function ContentArea() {
             tags: newTags
         };
         setNote(temp);
-        console.log(note);
     };
 
     const addTag = () => {};

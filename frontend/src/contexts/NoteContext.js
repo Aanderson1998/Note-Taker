@@ -16,7 +16,7 @@ const NoteContextProvider = (props) => {
 
     const fetchNotes = () => {
         console.log('fetch notes');
-        fetch('http://localhost:8080/get_all')
+        fetch('http://3.16.13.233:8080/get_all')
         .then(res => res.json())
         .then(data => {
             setNotes(data);
@@ -56,7 +56,7 @@ const NoteContextProvider = (props) => {
 
 
     return(
-        <NoteContext.Provider value={[note, setNote, filterNotes, filterResults, fetchNotes]}>
+        <NoteContext.Provider value={[note, setNote, filterNotes, filterResults, fetchNotes, notes]}>
             {props.children}
         </NoteContext.Provider>
     );

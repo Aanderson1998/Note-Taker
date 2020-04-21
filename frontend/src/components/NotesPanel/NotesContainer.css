@@ -1,10 +1,9 @@
 .notes-container {
-    height: 80vh;
-    /* background-color: red; */
+    max-height: calc(100vh - 260px);
     overflow-y: auto;
     overflow-x: hidden;
     padding-right: 6px;
-    margin-bottom: 1em;
+    box-sizing: border-box;
 }
 
 .notes-container h3 {

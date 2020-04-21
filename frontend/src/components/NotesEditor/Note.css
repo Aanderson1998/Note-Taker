@@ -4,6 +4,10 @@
     transition: 0.4s background-color;
     background-color:whitesmoke;
     border:thick solid #C8C9CB;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .note:hover {
