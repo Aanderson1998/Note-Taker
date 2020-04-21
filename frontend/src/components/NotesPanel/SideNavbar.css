@@ -3,6 +3,7 @@
     min-width: 300px;
     width: 100%;
     margin: 0;
+    box-shadow: 4px 0 4px #1f1f1f5e;
 }
 
 .sidebar-nav {

@@ -1,4 +1,9 @@
 .markdown-editor textarea {
     min-height: 300px !important;
     margin-top: 10px;
+    max-width: 900px;
+}
+
+.markdown-editor input {
+    max-width: 900px;
 }
