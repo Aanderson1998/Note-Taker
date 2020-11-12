@@ -1,12 +1,10 @@
 # Note-Taker
 
-Note taker app that lets a user take notes in the Markdown language. Stores information like the title of the note, 
-the date the note was created and last modified, and tags that let the user search for the note later on. 
-There is a UI to search for notes, read notes, create, update, and delete notes. When displaying the Markdown notes, 
-the Markdown is rendered to HTML
+This application was built by a group of 3 students, and took a little under a month to complete. 
 
-There is a frontend and backend to the app. The frontend is written using the React framework.The backend uses a Spring server 
-persists the data to a file
+This is a note taker application that lets users take notes in the Markdown language. The Note is then rendered to HTML when you view it in the application. There is a UI component to create, update, delete, and read notes. The note itself contained information such as the title, the date the note was created, the date it was last modified, and tags that let the user search for the note later on. This information is then persisted to a file in the backend, so when users exit and come back to the app, their data is still there. 
 
-The assignment is also published online using AWS
+
+The frontend of the application was written using the React framework and the web development languages. And the backend of the application used the spring boot framework and java. The application was also hosted on AWS. 
+
 
