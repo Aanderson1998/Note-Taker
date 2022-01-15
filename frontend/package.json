@@ -21,7 +21,7 @@
   "homepage": "https://github.com/Jsndng408/Notes-Taker#readme",
   "dependencies": {
     "bootstrap": "^4.4.1",
-    "marked": "^0.8.2",
+    "marked": "^4.0.10",
     "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.0",
